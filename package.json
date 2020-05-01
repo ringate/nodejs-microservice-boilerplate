@@ -1,0 +1,30 @@
+{
+  "name": "api-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for REST API development with Node.js and Express.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "boilerplate",
+    "api",
+    "express"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.freshup.com.hk:custom/new-world-redemption-app"
+  },
+  "author": "Adrian Li <adrian.li@freshup.com.hk> (https://www.freshup.com.hk/)",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.10.0",
+    "rotating-file-stream": "^2.1.0",
+    "winston": "^3.2.1"
+  }
+}
