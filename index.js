@@ -27,6 +27,10 @@ app.use(cors());
 const stockRouter = require('./services/stock/stock.route');
 app.use('/stock', stockRouter);
 
+// modem service
+const modemRouter = require('./services/modem/modem.route');
+app.use('/modem', modemRouter);
+
 // other express routers
 app.get('/', (req, res) => res.send('OK'));
 
