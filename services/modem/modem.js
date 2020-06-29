@@ -15,7 +15,7 @@ modemController.create = (req, res) => {
         logger.error({ error: err });
         res.json({
           error: -2,
-          message: 'MongoDB Create Error',
+          message: 'MongoDB Connection Error',
           detail: err
         });
       } else {
@@ -26,7 +26,7 @@ modemController.create = (req, res) => {
             logger.error({ error: err });
             res.json({
               error: -3,
-              message: 'MongoDB Create [insert] Error',
+              message: 'MongoDB Create [insertOne] Error',
               detail: err
             });
           } else {
@@ -55,7 +55,43 @@ modemController.create = (req, res) => {
 
 modemController.read = (req, res) => {
   try {
-    res.json({});
+    if (typeof req.params.id !== 'undefined') {
+      MongoClient.connect(mongoUri, mongoOpts, (err, client) => {
+        if (err) {
+          logger.error({ error: err });
+          res.json({
+            error: -2,
+            message: 'MongoDB Connection Error',
+            detail: err
+          });
+        } else {
+          const db = client.db(dbName);
+          const data = req.params;
+          db.collection(colName).find(data).toArray((err, doc) => {
+            if (err) {
+              logger.error({ error: err });
+              res.json({
+                error: -3,
+                message: 'MongoDB Read [find] Error',
+                detail: err
+              });
+            } else {
+              res.json({
+                status: 'OK',
+                datetime: moment().utcOffset('+0800').format('YYYY-MM-DD HH:mm:ss'),
+                data: doc
+              });
+            }
+            client.close();
+          });
+        }
+      });
+    } else {
+      res.json({
+        error: -11,
+        message: 'Missing Parameter(s)'
+      });
+    }
   } catch(err) {
     logger.error('modemController.read error detected.');
     logger.error({ error: err });
@@ -68,7 +104,48 @@ modemController.read = (req, res) => {
 
 modemController.update = (req, res) => {
   try {
-    res.json({});
+    if (typeof req.params.id !== 'undefined') {
+      MongoClient.connect(mongoUri, mongoOpts, (err, client) => {
+        if (err) {
+          logger.error({ error: err });
+          res.json({
+            error: -2,
+            message: 'MongoDB Connection Error',
+            detail: err
+          });
+        } else {
+          const db = client.db(dbName);
+          const filter = req.params;
+          const data = { $set: req.body };
+          db.collection(colName).updateMany(filter, data, (err, doc) => {
+            if (err) {
+              logger.error({ error: err });
+              res.json({
+                error: -3,
+                message: 'MongoDB Update [updateMany] Error',
+                detail: err
+              });
+            } else {
+              res.json({
+                status: 'OK',
+                datetime: moment().utcOffset('+0800').format('YYYY-MM-DD HH:mm:ss'),
+                result: doc.result,
+                matchedCount: doc.matchedCount,
+                modifiedCount: doc.modifiedCount,
+                upsertedCount: doc.upsertedCount,
+                upsertedId: doc.upsertedId
+              });
+            }
+            client.close();
+          });
+        }
+      });
+    } else {
+      res.json({
+        error: -11,
+        message: 'Missing Parameter(s)'
+      });
+    }
   } catch(err) {
     logger.error('modemController.update error detected.');
     logger.error({ error: err });
@@ -81,7 +158,44 @@ modemController.update = (req, res) => {
 
 modemController.delete = (req, res) => {
   try {
-    res.json({});
+    if (typeof req.params.id !== 'undefined') {
+      MongoClient.connect(mongoUri, mongoOpts, (err, client) => {
+        if (err) {
+          logger.error({ error: err });
+          res.json({
+            error: -2,
+            message: 'MongoDB Connection Error',
+            detail: err
+          });
+        } else {
+          const db = client.db(dbName);
+          const data = req.params;
+          db.collection(colName).deleteMany(data, (err, doc) => {
+            if (err) {
+              logger.error({ error: err });
+              res.json({
+                error: -3,
+                message: 'MongoDB Delete [deleteMany] Error',
+                detail: err
+              });
+            } else {
+              res.json({
+                status: 'OK',
+                datetime: moment().utcOffset('+0800').format('YYYY-MM-DD HH:mm:ss'),
+                result: doc.result,
+                deletedCount: doc.deletedCount
+              });
+            }
+            client.close();
+          });
+        }
+      });
+    } else {
+      res.json({
+        error: -11,
+        message: 'Missing Parameter(s)'
+      });
+    }
   } catch(err) {
     logger.error('modemController.delete error detected.');
     logger.error({ error: err });
