@@ -1,5 +1,5 @@
 const moment = require('moment');
-const slotInfo = require('../data/stock');
+const slotInfo = require('../../data/stock');
 
 var stockController = {};
 

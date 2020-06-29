@@ -1,5 +1,5 @@
 const express = require('express');
-const stockController = require('../controllers/stockController');
+const stockController = require('./stock');
 const router = express.Router();
 
 // assign controllers for each routing

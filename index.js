@@ -6,7 +6,6 @@ const rfs = require('rotating-file-stream');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const logger = require('./logger').Logger;
-const stockRouter = require('./routes/stock');
 require('dotenv').config();
 
 // config and settings
@@ -24,8 +23,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// assign express routers
+// stock service
+const stockRouter = require('./services/stock/stock.route');
 app.use('/stock', stockRouter);
+
+// other express routers
 app.get('/', (req, res) => res.send('OK'));
 
 // start express service
