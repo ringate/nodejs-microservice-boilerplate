@@ -1,4 +1,5 @@
 const moment = require('moment');
+const logger = require('../../logger').Logger;
 const slotInfo = require('../../data/stock');
 
 var stockController = {};
