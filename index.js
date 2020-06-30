@@ -6,6 +6,7 @@ const rfs = require('rotating-file-stream');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const logger = require('./logger').Logger;
+const mongo = require('./mongo');
 require('dotenv').config();
 
 // config and settings
@@ -37,6 +38,15 @@ app.get('/', (req, res) => res.send('OK'));
 // start express service
 var server = app.listen(SERVER_PORT, () => {
   logger.info(`boilerplate service API port is ${SERVER_PORT}`);
+});
+
+process.on('SIGINT', function() {
+  mongo.close().then((result) => {
+    logger.info('MongoDB was disconnected on app termination.');
+    process.exit(0);
+  }).catch((err) => {
+    logger.error({ error: err });
+  });
 });
 
 module.exports = app;
