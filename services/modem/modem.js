@@ -1,5 +1,6 @@
 const moment = require('moment');
 const logger = require('../../logger').Logger;
+const errorStatus = require('../../data/error_response_code');
 const db = require('../../mongo');
 const colName = 'modemInfo';
 
@@ -19,28 +20,13 @@ modemController.create = (req, res) => {
           data: doc.ops
         });
       }).catch((err) => {
-        logger.error({ error: err });
-        res.json({
-          error: -3,
-          message: 'MongoDB Create Error',
-          detail: err
-        });
+        errorHandler(res, -12, err);
       });
     }).catch((err) => {
-      logger.error({ error: err });
-      res.json({
-        error: -2,
-        message: 'MongoDB Connection Error',
-        detail: err
-      });
+      errorHandler(res, -11, err);
     });
   } catch(err) {
-    logger.error('modemController.update error detected.');
-    logger.error({ error: err });
-    res.json({
-      error: -1,
-      message: 'Exception Error'
-    });
+    errorHandler(res, -1, err);
   }
 };
 
@@ -56,34 +42,16 @@ modemController.read = (req, res) => {
             data: doc
           });
         }).catch((err) => {
-          logger.error({ error: err });
-          res.json({
-            error: -3,
-            message: 'MongoDB Read Error',
-            detail: err
-          });
+          errorHandler(res, -13, err);
         });
       }).catch((err) => {
-        logger.error({ error: err });
-        res.json({
-          error: -2,
-          message: 'MongoDB Connection Error',
-          detail: err
-        });
+        errorHandler(res, -11, err);
       });
     } else {
-      res.json({
-        error: -11,
-        message: 'Missing Parameter(s)'
-      });
+      errorHandler(res, -2, err);
     }
   } catch(err) {
-    logger.error('modemController.read error detected.');
-    logger.error({ error: err });
-    res.json({
-      error: -1,
-      message: 'Exception Error'
-    });
+    errorHandler(res, -1, err);
   }
 };
 
@@ -104,34 +72,16 @@ modemController.update = (req, res) => {
             upsertedId: doc.upsertedId
           });
         }).catch((err) => {
-          logger.error({ error: err });
-          res.json({
-            error: -3,
-            message: 'MongoDB Update Error',
-            detail: err
-          });
+          errorHandler(res, -14, err);
         });
       }).catch((err) => {
-        logger.error({ error: err });
-        res.json({
-          error: -2,
-          message: 'MongoDB Connection Error',
-          detail: err
-        });
+        errorHandler(res, -11, err);
       });
     } else {
-      res.json({
-        error: -11,
-        message: 'Missing Parameter(s)'
-      });
+      errorHandler(res, -2, err);
     }
   } catch(err) {
-    logger.error('modemController.update error detected.');
-    logger.error({ error: err });
-    res.json({
-      error: -1,
-      message: 'Exception Error'
-    });
+    errorHandler(res, -1, err);
   }
 };
 
@@ -148,35 +98,40 @@ modemController.delete = (req, res) => {
             deletedCount: doc.deletedCount
           });
         }).catch((err) => {
-          logger.error({ error: err });
-          res.json({
-            error: -3,
-            message: 'MongoDB Delete Error',
-            detail: err
-          });
+          errorHandler(res, -15, err);
         });
       }).catch((err) => {
-        logger.error({ error: err });
-        res.json({
-          error: -2,
-          message: 'MongoDB Connection Error',
-          detail: err
-        });
+        errorHandler(res, -11, err);
       });
     } else {
-      res.json({
-        error: -11,
-        message: 'Missing Parameter(s)'
-      });
+      errorHandler(res, -2, err);
     }
   } catch(err) {
-    logger.error('modemController.delete error detected.');
-    logger.error({ error: err });
-    res.json({
-      error: -1,
-      message: 'Exception Error'
-    });
+    errorHandler(res, -1, err);
   }
 };
+
+const errorHandler = (res, errno, errmsg) => {
+  let err = {
+    status: "ERROR",
+    datetime: moment().format('YYYY-MM-DD HH:mm:ss')
+  }
+  if (typeof errno == 'undefined') {
+    errno = -1;
+  }
+  errorinfo = errorStatus.find(error => error.code === errno);
+  err = Object.assign({
+    errno: errorinfo.code,
+    message: errorinfo.message
+  }, err);
+  if (typeof errmsg != 'undefined') {
+    err = Object.assign({
+      detail: errmsg
+    }, err);
+  }
+  logger.error({ error: err });
+  res.json(err);
+  return;
+}
 
 module.exports = modemController;

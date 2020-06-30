@@ -1,0 +1,30 @@
+[
+  {
+    "code": -1,
+    "message": "Exception Error."
+  },
+  {
+    "code": -2,
+    "message": "Missing Parameter(s)."
+  },
+  {
+    "code": -11,
+    "message": "MongoDB Connection Error."
+  },
+  {
+    "code": -12,
+    "message": "MongoDB Create Error."
+  },
+  {
+    "code": -13,
+    "message": "MongoDB Read Error."
+  },
+  {
+    "code": -14,
+    "message": "MongoDB Update Error."
+  },
+  {
+    "code": -15,
+    "message": "MongoDB Delete Error."
+  }
+]
