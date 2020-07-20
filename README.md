@@ -13,7 +13,8 @@ $ npm start
 $ cp .env.dev .env
 ```
 
-#### API Calls
+#### Stock API Calls
+Available [testing APIs with postman](postman/API-Boilerplate.postman_collection.json). Now added modem APIs.
 1. [Say hello or health check.](http://localhost:5001/)
 2. [Get slot #1 information.](http://localhost:5001/stock/slot/1)
 3. [Get one item if named "bonaqua".](http://localhost:5001/stock/item/bonaqua)
@@ -25,19 +26,26 @@ $ cp .env.dev .env
 
 #### Project Folder and File Structure
 ```
+.
 ├── README.md
-├── controllers                 # All programming logic here.
-│   └── stockController.js
-├── data                        # Static sample data file.
+├── data                                # Static sample data files.
+│   ├── error_response_code.json
 │   └── stock.json
-├── index.js                    # Main application running service.
-├── logger.js                   # Custom logger.
+├── index.js                            # Main application running service.
+├── logger.js                           # Custom logger.
 ├── logs
-│   ├── access.log              # Express access log file.
-│   └── system.log              # Custom log file.
-├── node_modules
+│   ├── access.log                      # Express access log file.
+│   └── system.log                      # Custom log file.
+├── mongo.js                            # CRUD MongoDB service.
 ├── package-lock.json
 ├── package.json
-└── routes                      # Express router.
-    └── stock.js
+├── postman
+│   └── API-Boilerplate.postman_collection.json
+└── services                            # Service modularized folder structure.
+    ├── modem
+    │   ├── modem.js                    # Modem service programming logic.
+    │   └── modem.route.js              # Express router (Modem service).
+    └── stock
+        ├── stock.js                    # Stock service programming logic.
+        └── stock.route.js              # Express router (Stock service).
 ```
