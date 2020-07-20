@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "48d34956-348b-4b5f-99d5-c60d8e1d4e99",
+		"name": "API Boilerplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0) health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1a) GET stock - slot #1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/stock/slot/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"stock",
+						"slot",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1b) GET stock - named bonaqua",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/stock/item/bonaqua",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"stock",
+						"item",
+						"bonaqua"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1c) GET stock - price larger and equal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/stock/price/gt/40",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"stock",
+						"price",
+						"gt",
+						"40"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1d) GET stock - price less and equal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/stock/price/lt/21",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"stock",
+						"price",
+						"lt",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1e) GET stock - price equal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/stock/price/eq/35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"stock",
+						"price",
+						"eq",
+						"35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1f) GET stock - available",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/stock/left",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"stock",
+						"left"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2a) POST modem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "967453",
+							"type": "text"
+						},
+						{
+							"key": "operator",
+							"value": "CMHK",
+							"type": "text"
+						},
+						{
+							"key": "imsi",
+							"value": "6487263864862",
+							"type": "text"
+						},
+						{
+							"key": "iccid",
+							"value": "82347827947237478748",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5001/modem/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"modem",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2b) GET modem",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5001/modem/967453",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"modem",
+						"967453"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2c) PUT modem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "operator",
+							"value": "CMHK",
+							"type": "text"
+						},
+						{
+							"key": "imsi",
+							"value": "879879375385",
+							"type": "text"
+						},
+						{
+							"key": "iccid",
+							"value": "290384932804802938",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5001/modem/967453",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"modem",
+						"967453"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2d) DELETE modem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5001/modem/967453",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"modem",
+						"967453"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
