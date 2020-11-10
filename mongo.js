@@ -7,9 +7,13 @@ const dbOpts = {
 };
 const client = new MongoClient(dbUrl, dbOpts);
 
+const isConnected = () => {
+  return !!client && !!client.topology && client.topology.isConnected()
+}
+
 const open = () => {
   return new Promise((resolve, reject) => {
-    if (!client.isConnected()) {
+    if (!isConnected()) {
       return client.connect((err) => {
         if (err == null) {
           resolve('OK');
@@ -25,7 +29,7 @@ const open = () => {
 
 const close = () => {
   return new Promise((resolve, reject) => {
-    if (client.isConnected()) {
+    if (isConnected()) {
       return client.close((err) => {
         if (err == null) {
           resolve('OK');
@@ -41,7 +45,7 @@ const close = () => {
 
 const insert = (collection, data) => {
   return new Promise((resolve, reject) => {
-    if (client.isConnected()) {
+    if (isConnected()) {
       client.db(dbName).collection(collection).insertOne(data).then((res) => {
         resolve(res);
       }).catch((err) => {
@@ -55,13 +59,13 @@ const insert = (collection, data) => {
 
 const select = (collection, query, fields) => {
   return new Promise((resolve, reject) => {
-    if (client.isConnected()) {
+    if (isConnected()) {
       client.db(dbName).collection(collection).find(query).project(fields).toArray((err, res) => {
         if (err) {
-          reject(err); 
+          reject(err);
         } else {
           resolve(res);
-        } 
+        }
       });
     } else {
       reject('No connection.');
@@ -71,13 +75,13 @@ const select = (collection, query, fields) => {
 
 const update = (collection, query, data) => {
   return new Promise((resolve, reject) => {
-    if (client.isConnected()) {
+    if (isConnected()) {
       client.db(dbName).collection(collection).updateMany(query, data, (err, res) => {
         if (err) {
-          reject(err); 
+          reject(err);
         } else {
           resolve(res);
-        } 
+        }
       });
     } else {
       reject('No connection.');
@@ -87,13 +91,13 @@ const update = (collection, query, data) => {
 
 const remove = (collection, query) => {
   return new Promise((resolve, reject) => {
-    if (client.isConnected()) {
+    if (isConnected()) {
       client.db(dbName).collection(collection).deleteMany(query, (err, res) => {
         if (err) {
-          reject(err); 
+          reject(err);
         } else {
           resolve(res);
-        } 
+        }
       });
     } else {
       reject('No connection.');

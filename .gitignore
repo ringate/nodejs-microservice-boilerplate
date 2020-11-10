@@ -65,3 +65,8 @@ typings/
 
 # MacOS
 .DS_Store
+
+# Ignore runtime cached files
+data/*
+!data/stock.json
+!data/error_response_code.json
