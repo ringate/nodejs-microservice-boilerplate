@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node index.js"
   },
+  "engines": {
+    "node": ">=8.17.0"
+  },
   "keywords": [
     "boilerplate",
     "api",
@@ -14,17 +17,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@gitlab.freshup.com.hk:microservice/api-boilerplate"
+    "url": "git@github.com:ringate/nodejs-microservice-boilerplate.git"
   },
-  "author": "Adrian Li <adrian.li@freshup.com.hk> (https://www.freshup.com.hk/)",
-  "license": "UNLICENSED",
+  "homepage": "https://github.com/ringate/nodejs-microservice-boilerplate#readme",
+  "author": "Adrian Li <ringate@gmail.com>",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "chalk": "^4.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.31",
     "mongodb": "^3.5.9",
     "morgan": "^1.10.0",
