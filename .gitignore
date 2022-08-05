@@ -60,8 +60,10 @@ typings/
 # next.js build output
 .next
 
-# vs code configurations
+# Ignore IDE settings
 .vscode/
+.idea
+.project
 
 # MacOS
 .DS_Store
@@ -70,3 +72,6 @@ typings/
 data/*
 !data/stock.json
 !data/error_response_code.json
+
+# Ingore dist
+dist/

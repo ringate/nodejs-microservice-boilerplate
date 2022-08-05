@@ -1,6 +1,6 @@
-const moment = require('moment');
-const logger = require('../../logger').Logger;
-const slotInfo = require('../../data/stock');
+import moment from 'moment';
+import logger from '../../logger';
+import slotInfo from '../../../data/stock';
 
 var stockController = {};
 

@@ -1,7 +1,7 @@
 const winston = require('winston');
 const moment = require('moment-timezone');
 
-const Logger = winston.createLogger({
+const logger = winston.createLogger({
   level: "verbose",
   format: winston.format.combine(
     winston.format.timestamp(),
@@ -29,6 +29,4 @@ const Logger = winston.createLogger({
   ]
 });
 
-module.exports = {
-  Logger
-};
+module.exports = logger;

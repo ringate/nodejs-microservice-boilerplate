@@ -8,4 +8,4 @@ router.get('/:id', modemController.read);
 router.put('/:id', modemController.update);
 router.delete('/:id', modemController.delete);
 
-module.exports = router;
+module.exports = { router };
